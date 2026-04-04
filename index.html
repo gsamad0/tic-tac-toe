@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic Tac Toe</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a2e;
+      color: #e2e8f0;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    h1 {
+      color: #e94560;
+      font-size: 32px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+    }
+
+    /* Difficulty pills */
+    #difficulty {
+      display: flex;
+      gap: 10px;
+    }
+
+    #difficulty button {
+      background: #0f3460;
+      color: #a0aec0;
+      border: 1px solid #0f3460;
+      padding: 6px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.15s;
+    }
+
+    #difficulty button.active {
+      background: #e94560;
+      border-color: #e94560;
+      color: #fff;
+    }
+
+    /* Status */
+    #status {
+      color: #4fc3f7;
+      font-size: 16px;
+      letter-spacing: 1px;
+      height: 24px;
+    }
+
+    /* Board */
+    #board {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      grid-template-rows: repeat(3, 80px);
+      gap: 8px;
+    }
+
+    .cell {
+      background: #16213e;
+      border: 2px solid #0f3460;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: border-color 0.15s, box-shadow 0.15s;
+      user-select: none;
+    }
+
+    .cell:hover:not(.taken):not(.locked) {
+      border-color: #4fc3f7;
+      box-shadow: 0 0 10px rgba(79, 195, 247, 0.3);
+    }
+
+    .cell.x { color: #e94560; cursor: default; }
+    .cell.o { color: #4fc3f7; cursor: default; }
+    .cell.taken { cursor: default; }
+    .cell.locked { cursor: default; }
+
+    .cell.winner {
+      border-color: #f6e05e;
+      box-shadow: 0 0 16px rgba(246, 224, 94, 0.5);
+    }
+
+    /* Score */
+    #score {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .score-item {
+      text-align: center;
+    }
+
+    .score-value {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .score-value.x { color: #e94560; }
+    .score-value.draw { color: #a0aec0; }
+    .score-value.o { color: #4fc3f7; }
+
+    .score-label {
+      color: #a0aec0;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    /* New game button */
+    #new-game {
+      background: transparent;
+      color: #a0aec0;
+      border: 1px solid #0f3460;
+      padding: 8px 28px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      letter-spacing: 1px;
+      transition: border-color 0.15s, color 0.15s;
+    }
+
+    #new-game:hover {
+      border-color: #4fc3f7;
+      color: #4fc3f7;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tic Tac Toe</h1>
+
+  <div id="difficulty">
+    <button class="active" data-level="easy">Easy</button>
+    <button data-level="medium">Medium</button>
+    <button data-level="hard">Hard</button>
+  </div>
+
+  <div id="status">Your turn</div>
+
+  <div id="board">
+    <div class="cell" data-index="0"></div>
+    <div class="cell" data-index="1"></div>
+    <div class="cell" data-index="2"></div>
+    <div class="cell" data-index="3"></div>
+    <div class="cell" data-index="4"></div>
+    <div class="cell" data-index="5"></div>
+    <div class="cell" data-index="6"></div>
+    <div class="cell" data-index="7"></div>
+    <div class="cell" data-index="8"></div>
+  </div>
+
+  <div id="score">
+    <div class="score-item">
+      <div class="score-value x" id="score-x">0</div>
+      <div class="score-label">You (X)</div>
+    </div>
+    <div class="score-item">
+      <div class="score-value draw" id="score-draw">0</div>
+      <div class="score-label">Draws</div>
+    </div>
+    <div class="score-item">
+      <div class="score-value o" id="score-o">0</div>
+      <div class="score-label">AI (O)</div>
+    </div>
+  </div>
+
+  <button id="new-game">New Game</button>
+
+  <script>
+    // JS will go here in later tasks
+  </script>
+</body>
+</html>
