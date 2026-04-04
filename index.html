@@ -310,11 +310,51 @@
       return aiEasy(b);
     }
 
+    function minimax(b, isMaximizing) {
+      const result = checkWinner(b);
+      if (result) return result.winner === 'O' ? 10 : -10;
+      if (isDraw(b)) return 0;
+
+      const empty = getEmptyCells(b);
+      if (isMaximizing) {
+        let best = -Infinity;
+        for (const i of empty) {
+          b[i] = 'O';
+          best = Math.max(best, minimax(b, false));
+          b[i] = null;
+        }
+        return best;
+      } else {
+        let best = Infinity;
+        for (const i of empty) {
+          b[i] = 'X';
+          best = Math.min(best, minimax(b, true));
+          b[i] = null;
+        }
+        return best;
+      }
+    }
+
+    function aiHard(b) {
+      let bestScore = -Infinity;
+      let bestIndex = null;
+      for (const i of getEmptyCells(b)) {
+        b[i] = 'O';
+        const score = minimax(b, false);
+        b[i] = null;
+        if (score > bestScore) {
+          bestScore = score;
+          bestIndex = i;
+        }
+      }
+      return bestIndex;
+    }
+
     function aiMove() {
       let index;
       if (difficulty === 'easy') index = aiEasy(board);
       else if (difficulty === 'medium') index = aiMedium(board);
-      // hard added in next task
+      else index = aiHard(board);
       board[index] = 'O';
       renderBoard();
       const win = checkWinner(board);
