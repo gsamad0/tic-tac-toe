@@ -183,7 +183,41 @@
   <button id="new-game">New Game</button>
 
   <script>
-    // JS will go here in later tasks
+    // ─── State ───────────────────────────────────────────────────────────────────
+    let board = Array(9).fill(null);   // null | 'X' | 'O'
+    let difficulty = 'easy';
+    let gameOver = false;
+    const score = { X: 0, draw: 0, O: 0 };
+
+    // ─── DOM refs ────────────────────────────────────────────────────────────────
+    const cells = document.querySelectorAll('.cell');
+    const statusEl = document.getElementById('status');
+    const scoreXEl = document.getElementById('score-x');
+    const scoreDrawEl = document.getElementById('score-draw');
+    const scoreOEl = document.getElementById('score-o');
+
+    // ─── Render ──────────────────────────────────────────────────────────────────
+    function renderBoard(winLine = []) {
+      cells.forEach((cell, i) => {
+        const val = board[i];
+        cell.textContent = val ?? '';
+        cell.className = 'cell';
+        if (val === 'X') cell.classList.add('x', 'taken');
+        if (val === 'O') cell.classList.add('o', 'taken');
+        if (gameOver) cell.classList.add('locked');
+        if (winLine.includes(i)) cell.classList.add('winner');
+      });
+    }
+
+    function renderScore() {
+      scoreXEl.textContent = score.X;
+      scoreDrawEl.textContent = score.draw;
+      scoreOEl.textContent = score.O;
+    }
+
+    // Initial render
+    renderBoard();
+    renderScore();
   </script>
 </body>
 </html>
