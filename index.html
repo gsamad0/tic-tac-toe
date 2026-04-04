@@ -275,6 +275,28 @@
       });
     });
 
+    // ─── AI ──────────────────────────────────────────────────────────────────────
+    function getEmptyCells(b) {
+      return b.reduce((acc, val, i) => (val === null ? [...acc, i] : acc), []);
+    }
+
+    function aiEasy(b) {
+      const empty = getEmptyCells(b);
+      return empty[Math.floor(Math.random() * empty.length)];
+    }
+
+    function aiMove() {
+      let index;
+      if (difficulty === 'easy') index = aiEasy(board);
+      // medium and hard added in later tasks
+      board[index] = 'O';
+      renderBoard();
+      const win = checkWinner(board);
+      if (win) { endGame('O'); return; }
+      if (isDraw(board)) { endGame('draw'); return; }
+      statusEl.textContent = 'Your turn';
+    }
+
     // Initial render
     renderBoard();
     renderScore();
