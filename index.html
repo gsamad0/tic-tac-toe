@@ -382,9 +382,10 @@
 
     document.getElementById('new-game').addEventListener('click', resetBoard);
 
-    // Initial render
+    // ─── Init ─────────────────────────────────────────────────────────────────────
     renderBoard();
     renderScore();
+    statusEl.textContent = 'Your turn';
   </script>
 </body>
 </html>
