@@ -238,6 +238,43 @@
       return b.every(cell => cell !== null) && !checkWinner(b);
     }
 
+    // ─── Game flow ────────────────────────────────────────────────────────────────
+    function endGame(result) {
+      // result: 'X' | 'O' | 'draw'
+      gameOver = true;
+      const winResult = checkWinner(board);
+      renderBoard(winResult ? winResult.line : []);
+      if (result === 'X') {
+        score.X++;
+        statusEl.textContent = 'You win!';
+      } else if (result === 'O') {
+        score.O++;
+        statusEl.textContent = 'AI wins!';
+      } else {
+        score.draw++;
+        statusEl.textContent = "It's a draw!";
+      }
+      renderScore();
+    }
+
+    function playerMove(index) {
+      if (gameOver || board[index]) return;
+      board[index] = 'X';
+      renderBoard();
+      const win = checkWinner(board);
+      if (win) { endGame('X'); return; }
+      if (isDraw(board)) { endGame('draw'); return; }
+      statusEl.textContent = 'AI thinking...';
+      setTimeout(aiMove, 300);
+    }
+
+    // Wire up cell clicks
+    cells.forEach(cell => {
+      cell.addEventListener('click', () => {
+        playerMove(Number(cell.dataset.index));
+      });
+    });
+
     // Initial render
     renderBoard();
     renderScore();
