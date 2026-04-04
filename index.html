@@ -285,10 +285,36 @@
       return empty[Math.floor(Math.random() * empty.length)];
     }
 
+    // Returns the index of a winning move for `player`, or null
+    function findWinningMove(b, player) {
+      for (const line of WIN_LINES) {
+        const [a, bb, c] = line;
+        const vals = [b[a], b[bb], b[c]];
+        const playerCount = vals.filter(v => v === player).length;
+        const emptyCount = vals.filter(v => v === null).length;
+        if (playerCount === 2 && emptyCount === 1) {
+          return line[vals.indexOf(null)];
+        }
+      }
+      return null;
+    }
+
+    function aiMedium(b) {
+      // Win if possible
+      const win = findWinningMove(b, 'O');
+      if (win !== null) return win;
+      // Block player win
+      const block = findWinningMove(b, 'X');
+      if (block !== null) return block;
+      // Otherwise random
+      return aiEasy(b);
+    }
+
     function aiMove() {
       let index;
       if (difficulty === 'easy') index = aiEasy(board);
-      // medium and hard added in later tasks
+      else if (difficulty === 'medium') index = aiMedium(board);
+      // hard added in next task
       board[index] = 'O';
       renderBoard();
       const win = checkWinner(board);
