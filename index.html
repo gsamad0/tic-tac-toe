@@ -363,6 +363,25 @@
       statusEl.textContent = 'Your turn';
     }
 
+    // ─── Controls ─────────────────────────────────────────────────────────────────
+    function resetBoard() {
+      board = Array(9).fill(null);
+      gameOver = false;
+      statusEl.textContent = 'Your turn';
+      renderBoard();
+    }
+
+    document.querySelectorAll('#difficulty button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('#difficulty button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        difficulty = btn.dataset.level;
+        resetBoard();
+      });
+    });
+
+    document.getElementById('new-game').addEventListener('click', resetBoard);
+
     // Initial render
     renderBoard();
     renderScore();
