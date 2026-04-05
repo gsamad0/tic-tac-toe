@@ -44,11 +44,25 @@ Switching difficulty triggers `resetBoard` (board only, score preserved).
 
 ## Git workflow
 
-Branch: `main` — push every meaningful change immediately.  
-Commit format: `type: short present-tense description` (types: `feat`, `fix`, `refactor`, `style`, `chore`, `docs`).
+**Commit and push after every meaningful change** — never leave work uncommitted. This ensures a saved remote version exists at all times and any change can be reverted cleanly.
+
+Branch: `main`. Remote: `https://github.com/gsamad0/tic-tac-toe`.
 
 ```bash
 git add .
 git commit -m "type: description"
 git push origin main
 ```
+
+Commit format: `type: short present-tense description`
+
+| Type | When |
+|------|------|
+| `feat` | new feature or behaviour |
+| `fix` | bug fix |
+| `style` | CSS / visual-only changes |
+| `refactor` | restructure without behaviour change |
+| `chore` | config, tooling, maintenance |
+| `docs` | documentation only |
+
+**When to commit:** after each logical unit of work — a new feature, a bug fix, a styling pass. Do not batch unrelated changes into one commit. Push immediately after committing.
