@@ -1,0 +1,17 @@
+# Claude Code internal directories
+.claude/
+.superpowers/
+
+# MCP config (may contain tokens)
+.mcp.json
+
+# Dependencies
+node_modules/
+
+# Environment
+.env
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
